@@ -1,0 +1,357 @@
+
+SUPPLIER:
+- when u pay a supplier, the amount is not added to the total expenditure, ie there is no appropriate insert into the expenses table.
+- you can pay a supplier more than what he/she is due.
+- when creating the supply payment, issueing more thatn one payment will make the others none accessibl. This causes a great problem as the others
+  are left out. say issuex 10 000 today and issuex 20 000 today evening without the first havnt being paid, the first is never looked at as we 
+  we search for the most recent with a boolean status of false.
+           WHAT DO I DO. 2 THINGS.
+                force the system not to receive any further payment request until the last active one is paid to completion or
+                Allow the system to accept more than one payment issue and change query to get payment issue amt per supplier(changing to aggregation ).
+
+- use a dialog to indicate the payment issue was done successfully.
+
+
+
+15 sept 20133
+ ** How to check if the datapicker fields have not been filled. This is so that we can limit the search to only
+    starting/ending date of combination of starting/ending date and(or) id of whatsoever table we are searching.
+ ** The updates after a supplier pay is not shown on the screen but seems to be effected.
+ ** Only the normal income and expenditure transactions at the cashier's desk bring forth the days expenditure and income with total balance 
+    but the others will bring forth the total income and total expenditure since start of the app.
+        So need to copy the part of updating tot income/expenses view from normal income/expenses method to the others(debtors, salary, overdraft and supplier payment).
+
+2014 11 22
+
+2015 01 10
+
+DONE:
+
+ ** while issueing the overdraft, we specify the start date but during staff payment,
+    that amount is deducted once the overdraft status is active, that is, 
+    we need to check if the date is greater than the overdraft start date and the 
+    status is false before deducting the overdraft amount from the staff.
+                                              ->>  PENDING.  done
+** on displaying overdraft information, the start deduction date and expiry date are interchanged.
+                                               ->> PENDING   done
+
+BUG FIXING.  03/10/14
+*** make the overdraft, issued debt to custumer, issue debt to supplier have the edit and delete option
+*** also, when we edit a supplier payment/custumer payment, it should affect the supplier/custumer pay done by the cashier
+*** upon any issue of overdraft, custumer debt, supplier debt, the user should be displayed a confirmatory message.
+*** PPPROBLEM. If the custumer, suppliler amount paid makes the debt paid, and the user wants to reduce that amount,
+               what do i do to change the status of that debt from paid to unpaid.
+*** clear all fields after submission.
+*** automaticall set the payable amount to the input element for all supplier
+*** set the paper size of the supplier/custumer pay to A5.  letter 8.5x 11inch
+                    margin : left 3.2 3.2 3.2 3.2 portrait tray 1
+
+
+
+
+            //This is the query string
+            String query;
+            
+            /*-------------------------------------------------------------------------------------------*/
+            System.out.println("creating ACCOUNTS table");
+            query = "CREATE TABLE njieDB.ACCOUNT ( " +
+                        "  ACC_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "  (START WITH 1, INCREMENT BY 1), " +
+                        "  USERNAME VARCHAR(20), " +
+                        "  PASSWORD VARCHAR(45)," +
+                        "  ROLE CHAR(1), " +
+                        "  C_TIME TIMESTAMP, " +
+                        "  UNIQUE (ACC_ID, C_TIME), " +
+                        "  PRIMARY KEY ( USERNAME ) " +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating EXPENSE TRANS CLASS table");
+            query = "CREATE TABLE njieDB.EXP_TRANS_CLASS ( " +
+                        "  CODE INTEGER NOT NULL, " +
+                        "  NAME VARCHAR(20), " +
+                        "  INFO VARCHAR(200), " +
+                        "  C_DATE TIMESTAMP, " +
+                        "  PRIMARY KEY (CODE)" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating EXPENSE CLASS table");
+            query = "CREATE TABLE njieDB.EXPENSES (" +
+                        "  TRANS_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "  (START WITH 1, INCREMENT BY 1), " +
+                        "  CODE INTEGER NOT NULL, " +
+                        "  MEMO VARCHAR(300)," +
+                        "  AMOUNT INTEGER," +
+                        "  DAT DATE, " +
+                        "  TIM TIME, " +
+                        "  PRIMARY KEY (TRANS_ID), " +
+                        "  FOREIGN KEY ( code ) " +
+                        "   REFERENCES njiedb.EXP_TRANS_CLASS (code )" +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating INCOME TRANSACTION CLASS table");
+            query = "CREATE TABLE njieDB.INC_TRANS_CLASS (" +
+                        "  CODE INTEGER NOT NULL," +
+                        "  NAME VARCHAR(20)," +
+                        "  INFO VARCHAR(200), " +
+                        "  C_DATE TIMESTAMP, " +
+                        "  PRIMARY KEY (CODE)" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating INCOME table");
+            query = "CREATE TABLE njieDB.INCOME (" +
+                        "  TRANS_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "  (START WITH 1, INCREMENT BY 1), " +
+                        "  CODE INTEGER NOT NULL,  " +
+                        "  MEMO VARCHAR(300)," +
+                        "  AMOUNT INTEGER," +
+                        "  DAT DATE, " +
+                        "  TIM TIME, " +
+                        "  PRIMARY KEY (TRANS_ID), " +
+                        "  FOREIGN KEY ( code ) " +
+                        "   REFERENCES njiedb.INC_TRANS_CLASS (code )" +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating STAFF table");
+            query = "CREATE TABLE njieDB.STAFF (" +
+                        "  STAFF_ID INTEGER NOT NULL," +
+                        "  NAME VARCHAR(30)," +
+                        "  PHONE_NUMBER BIGINT," +
+                        "  SALARY BIGINT, " +
+                        "  BRANCH VARCHAR(20), " +
+                        "  EMP_DATE DATE NOT NULL, " +
+                        "  PRIMARY KEY (STAFF_ID)" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating PAYROLL table");
+            query = "CREATE TABLE njieDB.PAYROLL (" +
+                        "   PAYMT_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   STAFF_ID INTEGER," +
+                        "   AMOUNT_PAID BIGINT," +
+                        "   PAY_DATE DATE," +
+                        "   PRIMARY KEY( PAYMT_ID ), " +
+                        "   FOREIGN KEY ( staff_id ) " +
+                        "   REFERENCES njiedb.STAFF (staff_id )" +
+                        "   on delete no action " +
+                        "   on update no action " +
+                        "  )";
+            statement.execute(query);
+            
+            
+            /*This is the most recent table i added. It is to aid the problem of changing salary causing excess salary*/
+            System.out.println("creating MONTHS SALARY PAYMENT table");
+            query = "CREATE TABLE njieDB.MONTHLY_SALARY_PAYMENT ( " +
+                        "   DAT DATE NOT NULL, " +
+                        "   SALARY BIGINT, " + 
+                        "   TOTAL_PAID BIGINT DEFAULT 0, " +
+                        "   STAFF_ID INTEGER NOT NULL, " +
+                        "   PRIMARY KEY ( DAT, STAFF_ID ), " +
+                        "   FOREIGN KEY ( staff_id ) " +
+                        "   REFERENCES njiedb.STAFF (staff_id )" +
+                        "   on delete no action " +
+                        "   on update no action " +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating OVERDRAFT table");
+            query = "CREATE TABLE njieDB.OVERDRAFT (" +
+                        "  OV_ID INTEGER NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "  (START WITH 1, INCREMENT BY 1), " +
+                        "  STAFF_ID INTEGER," +
+                        "  AMOUNT INTEGER," +
+                        "  DATE DATE DEFAULT CURRENT_DATE, " +
+                        "  TIM_ISSUED TIME DEFAULT CURRENT_TIME,   " +
+                        "  DEDUCTION_PER_MONTH INTEGER," +
+                        "  EXP_STATUS BOOLEAN DEFAULT false, " +
+                        "  DEDUCTION_START_DATE DATE, " +
+                        "  DEDUCT_UNTIL DATE, " +
+                        "  PAY_STATUS BOOLEAN DEFAULT false , " +
+                        "  PRIMARY KEY (OV_ID), " +
+                        "  FOREIGN KEY ( staff_id ) " +
+                        "   REFERENCES njiedb.STAFF (staff_id )" +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating CUSTUMER table");
+            query = "CREATE TABLE njieDB.CUSTUMER ( " +
+                        "   CUST_ID VARCHAR(10) NOT NULL, " +
+                        "   NAME VARCHAR(30), " +
+                        "   PREFERED_GOODS VARCHAR(400), " +
+                        "   C_DATE DATE, " +
+                        "   PRIMARY KEY (CUST_ID) " +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating DEBTS table");
+            query = "CREATE TABLE njieDB.DEBTS ( " +
+                        "   DEBT_ID INT  NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   CUST_ID VARCHAR(10) NOT NULL, " +
+                        "   AMOUNT BIGINT NOT NULL, " +
+                        "   DATE_ISSUED TIMESTAMP, " +
+                        "   PRIMARY KEY (DEBT_ID), " +
+                        "   FOREIGN KEY (cust_id ) " +
+                        "   REFERENCES njiedb.CUSTUMER ( cust_id ) " +
+                        "   on delete no action" +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating DEBT PAYMENT table");
+            query = "CREATE TABLE njieDB.DEBT_PAYMENT (" +
+                        "   PAY_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   EXP_ID INTEGER NOT NULL," +
+                        "   CUST_ID VARCHAR(10), " +
+                        "   AMOUNT_PAID INTEGER," +
+                        "   DATE DATE, " +
+                        "   PRIMARY KEY(PAY_ID), " +
+                        "   FOREIGN KEY (cust_id ) " +
+                        "   REFERENCES njiedb.CUSTUMER ( cust_id ) " +
+                        "   on delete no action" +
+                        "   on update no action, " +
+                        "   FOREIGN KEY (exp_id)" +
+                        "   REFERENCES njiedb.INCOME (trans_id)" +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "   )";
+            statement.execute(query);
+
+            System.out.println("creating SUPPLIER table");
+            query = "CREATE TABLE njieDB.SUPPLIER (" +
+                        "  SUP_CODE INTEGER NOT NULL," +
+                        "  NAME VARCHAR(45)," +
+                        "  SERVICES VARCHAR(200), " +
+                        "  PRIMARY KEY (SUP_CODE)" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating SUPPLIER PAY ORDER table");
+            query = "CREATE TABLE njieDB.SUPPLIER_PAY_ORDER (" +
+                        "   ID BIGINT NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   SUPPLIER_CODE INTEGER NOT NULL," +
+                        "   AMOUNT INTEGER," +
+                        "   ORDER_DATE DATE ," +
+                        "   PRIMARY KEY (ID), " +
+                        "   FOREIGN KEY (supplier_code) " +
+                        "   REFERENCES njiedb.SUPPLIER (sup_code) " +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating SUPPLIER PAY table");
+            query = "CREATE TABLE njieDB.SUPPLIER_PAY (" +
+                        "   PAY_ID INT NOT NULL GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   EXP_ID INTEGER NOT NULL," +
+                        "   SUP_ID INT, " +
+                        "   AMOUNT_PAID INTEGER," +
+                        "   DATE DATE, " +
+                        "   PRIMARY KEY(PAY_ID), " +
+                        "   FOREIGN KEY (sup_id) " +
+                        "   REFERENCES njiedb.SUPPLIER (sup_code) " +
+                        "   on delete no action " +
+                        "   on update no action, " +
+                        "   FOREIGN KEY (exp_id) " +
+                        "   REFERENCES njiedb.EXPENSES (trans_id) " +
+                        "   on delete no action " +
+                        "   on update no action" +
+                        "  )";
+            statement.execute(query);
+
+            System.out.println("creating SALARY SUSPENSION table");
+            query = "create table njiedb.salary_suspension(" +
+                        "   id int not null GENERATED ALWAYS AS IDENTITY " +
+                        "   (START WITH 1, INCREMENT BY 1), " +
+                        "   sus_amt int not null, " +
+                        "   staff_id int not null, " +
+                        "   dat date not null, " +
+                        "   primary key (id), " +
+                        "   foreign key ( staff_id ) " +
+                        "   references njiedb.staff ( staff_id ) " +
+                        "   on delete no action " +
+                        "   on update no action " +
+                        "  )";
+            statement.execute(query);
+            
+            System.out.println("end of table creation");
+            /*------------------------------------------------------------------------------------------*/
+            
+            
+            
+            /***********************************
+             *CREATING DEFAULT ACCOUNTS FOR EXPENSE TRANSACTION CLASS: 1->SUPPLIERpAYMENT 2->PAYROLL 3->OVERDRAFT 
+             ***********************************
+             * NOTE THAT THIS HAS TO BE REMOVED BEFORE DEPLOYMENT AS ITS JUST FOR TESTING AND IS GOING GOING TO CAUSE SOME ERROR
+             */
+            System.out.println("Creating default expenses transaction classes"
+                    + " -> 1 paySupplier, 2 payroll, 3 Overdraft");
+            query = "INSERT INTO njieDB.EXP_TRANS_CLASS(njieDB.EXP_TRANS_CLASS.CODE, njieDB.EXP_TRANS_CLASS.NAME, "
+                    + " njieDB.EXP_TRANS_CLASS.INFO, njieDB.EXP_TRANS_CLASS.C_DATE ) "
+                    + " VALUES (" + 1 + ", 'SUPPLIER PAYMENT', 'PAYMENT MADE TO SUPPLIER FOR GOODS SUPPLIED TO THE COMPANY', CURRENT_TIMESTAMP ) ";
+            statement.execute(query);
+            query = "INSERT INTO njieDB.EXP_TRANS_CLASS(njieDB.EXP_TRANS_CLASS.CODE, njieDB.EXP_TRANS_CLASS.NAME, "
+                    + " njieDB.EXP_TRANS_CLASS.INFO, njieDB.EXP_TRANS_CLASS.C_DATE ) "
+                    + " VALUES (" + 2 + ", 'PAYROLL', 'PAYMENT TO STAFFS DURING AND AT THE END OF THE MONTH', CURRENT_TIMESTAMP ) ";
+            statement.execute(query);
+            query = "INSERT INTO njieDB.EXP_TRANS_CLASS(njieDB.EXP_TRANS_CLASS.CODE, njieDB.EXP_TRANS_CLASS.NAME, "
+                    + " njieDB.EXP_TRANS_CLASS.INFO, njieDB.EXP_TRANS_CLASS.C_DATE ) "
+                    + " VALUES (" + 3 + ", 'OVERDRAFT', 'OVERDRAFT ISSUED TO WORKERS. PARTICULAR AMOUNTS WILL BE DEDUCTED FROM THEIR SALARIES UNTIL THE TOTAL AMOUNT IS TOTALY PAID', CURRENT_TIMESTAMP ) ";
+            statement.execute(query);
+            System.out.println("end creating default expense transaction accounts");
+            
+            /***********************************
+             *CREATING DEFAULT ACCOUNTS FOR INCOME TRANSACTION CLASS: 1->DEBTS 2->PAYROLL 3->OVERDRAFT 
+             ***********************************
+             */
+            System.out.println("Creating default income transaction classes"
+                    + " -> 1 custumer debts");
+            query = "INSERT INTO njieDB.INC_TRANS_CLASS(njieDB.INC_TRANS_CLASS.CODE, njieDB.INC_TRANS_CLASS.NAME, "
+                    + " njieDB.INC_TRANS_CLASS.INFO, njieDB.INC_TRANS_CLASS.C_DATE ) "
+                    + " VALUES (" + 1 + ", 'CUSTUMER PAYBACK', 'DEBTS PAID BY CUSTUMERS OF THE ENTERPRISE', CURRENT_TIMESTAMP ) ";
+            statement.execute(query);
+            System.out.println("end of creating the income transaction class");
+            
+            
+            /************************************************
+             *      LOADING DEFAULT SETTINGS FOR THE USER
+             * **********************************************
+             */
+            Dialogs.create().title("Default Transaction classes")
+                    .masthead("THIS PRODUCT IS LISCENCE FOR ONE(1) YEAR\n AFTER WHICH YOU WILL BE REQUIRED TO RENEW YOUR LISCENCE")
+                    .message("Welcome to the accountx soft from Unity Systems."
+                    + " DEFAULT SETTINGS. certain accounts have been created by default and are going to be used by various services. It is adviced that they should not be deleted. They fall under 2 classes. INCOME and EXPENSES class which include"
+                    + " INCOME.         1->CUSTUMER PAYBACK \n"
+                    + " EXPENSES        1->SUPPLIER PAYMENT\n"
+                    + "                 2->PAYROLL \n"
+                    + "                 3->OVERDRAFT\n"
+                    + "\nDETAILS ABOUT THESE TRANSACTION CLASS CAN BE FOUND IN THE MANAGERS SECTION UNDER THE TRANSACTION TAB."
+                    + "         \n\n @US").showInformation();
+            
+            /*Insert default users*/
+            System.out.println("Inserting default users : admin admin manager and user user as cashier  ");
+            System.out.println("root->root->manager");
+            query = "INSERT INTO njieDB.ACCOUNT(njieDB.ACCOUNT.C_TIME, njieDB.ACCOUNT.USERNAME, njieDB.ACCOUNT.PASSWORD, njieDB.ACCOUNT.ROLE) VALUES(CURRENT_TIMESTAMP, 'ADMIN', 'YOURSELF', 'M')";
+            statement.execute(query);
+            
+            System.out.println("user->user->cashier");
+            query = "INSERT INTO njieDB.ACCOUNT(njieDB.ACCOUNT.C_TIME, njieDB.ACCOUNT.USERNAME, njieDB.ACCOUNT.PASSWORD, njieDB.ACCOUNT.ROLE) VALUES(CURRENT_TIMESTAMP, 'user', 'user', 'C')";
+            statement.execute(query);
+            
+            
+            
+            System.out.println("---------------------- end of database modelling -------------------------");

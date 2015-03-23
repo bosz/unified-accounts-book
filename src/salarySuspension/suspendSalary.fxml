@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.net.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="accounts_anchor" fx:id="suspensionAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="585.0" prefWidth="1220.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="salarySuspension.SuspendSalaryController">
+   <children>
+      <Label layoutX="344.0" layoutY="14.0" text="Salary Suspension Module" textFill="#952bbf">
+         <font>
+            <Font name="FreeMono Bold" size="37.0" />
+         </font>
+      </Label>
+      <Button contentDisplay="TOP" layoutX="24.0" layoutY="143.0" mnemonicParsing="false" onMouseClicked="#displaySuspendSalaryPane" prefHeight="145.0" prefWidth="150.0" styleClass=".button" stylesheets="@main.css" text="Suspend Staff Salary" textAlignment="CENTER" wrapText="true">
+         <graphic>
+            <ImageView fitHeight="94.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../njieaccount/njie_img/SalarySuspension.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Button contentDisplay="TOP" layoutX="24.0" layoutY="339.0" mnemonicParsing="false" onMouseClicked="#displayViewEditDeleteSuspensionPane" prefHeight="145.0" prefWidth="150.0" styleClass=".button" stylesheets="@main.css" text="View/Edit/delete suspended salaries" textAlignment="CENTER" wrapText="true">
+         <graphic>
+            <ImageView fitHeight="123.0" fitWidth="132.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../njieaccount/njie_img/listOfSuspensions.jpg" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Button>
+      <Pane id="accounts_anchor" fx:id="defaultSuspensionPane" layoutX="282.0" layoutY="76.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css">
+         <children>
+            <Label layoutX="168.0" layoutY="23.0" text="Suspension Section" textFill="#952bbf">
+               <font>
+                  <Font name="FreeMono Bold" size="37.0" />
+               </font>
+            </Label>
+            <Hyperlink layoutX="147.0" layoutY="140.0" onMouseClicked="#displaySuspendSalaryPane" text="Suspend Staff's Salary" textFill="#268621">
+               <font>
+                  <Font name="Droid Sans Mono" size="32.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink layoutX="128.0" layoutY="297.0" onMouseClicked="#displayViewEditDeleteSuspensionPane" text="Alter Salary Suspensions" textFill="#268621">
+               <font>
+                  <Font name="Droid Sans Mono" size="32.0" />
+               </font>
+            </Hyperlink>
+         </children>
+      </Pane>
+      <Pane id="accounts_anchor" fx:id="MakeSuspensionPane" layoutX="282.0" layoutY="76.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css" visible="false">
+         <children>
+            <Label layoutX="235.0" layoutY="14.0" text="Suspend Staff Salary" textFill="#952bbf">
+               <font>
+                  <Font name="FreeMono Bold" size="37.0" />
+               </font>
+            </Label>
+            <GridPane layoutX="99.0" layoutY="77.0" prefHeight="226.0" prefWidth="513.0">
+               <columnConstraints>
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+                  <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" />
+               </columnConstraints>
+               <rowConstraints>
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+                  <RowConstraints minHeight="10.0" vgrow="SOMETIMES" />
+               </rowConstraints>
+               <children>
+                  <Label layoutX="99.0" layoutY="174.0" text="Suspension Amount" textFill="#4d4242" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="staffIdToSuspensInpt" layoutX="342.0" layoutY="114.0" promptText="Staff Id to suspend" GridPane.columnIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="amtToSuspendInpt" layoutX="342.0" layoutY="172.0" promptText="amount to suspend" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <TextField fx:id="suspensionReason" layoutX="342.0" layoutY="227.0" onKeyTyped="#suspendSalaryOnPressingEnter" promptText="Suspension Reason" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                  </TextField>
+                  <Label layoutX="110.0" layoutY="242.0" text="Reason" textFill="#4d4242" GridPane.rowIndex="2">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="134.0" layoutY="116.0" text="Staff Id" textFill="#4d4242">
+                     <font>
+                        <Font size="19.0" />
+                     </font>
+                  </Label>
+               </children>
+            </GridPane>
+            <Button layoutX="465.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#suspendSalaryAddToDatabase" text="Suspend" />
+            <Button layoutX="567.0" layoutY="319.0" mnemonicParsing="false" onMouseClicked="#resetSuspensionInputs" text="Reset" />
+         </children>
+      </Pane>
+      <Pane id="accounts_anchor" fx:id="alterSuspensionsPane" layoutX="218.0" layoutY="76.0" prefHeight="482.0" prefWidth="954.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css" visible="false">
+         <children>
+            <Label layoutX="249.0" layoutY="14.0" text="Alter Salary Suspension Info" textFill="#952bbf">
+               <font>
+                  <Font name="FreeMono Bold" size="37.0" />
+               </font>
+            </Label>
+            <TableView fx:id="viewSuspensionsTable" layoutX="15.0" layoutY="67.0" prefHeight="365.0" prefWidth="923.0">
+              <columns>
+                <TableColumn fx:id="viewSusTab_susIdCol" minWidth="0.0" prefWidth="0.0" text="Suspension_Id" visible="false" />
+                <TableColumn fx:id="viewSusTab_staffNameCol" minWidth="50.0" prefWidth="231.0" text="Staff Name" />
+                  <TableColumn fx:id="viewSusTab_AmountCol" minWidth="50.0" prefWidth="107.0" text="Amount" />
+                  <TableColumn fx:id="viewSusTab_ReasonCol" prefWidth="351.0" text="Reason" />
+                  <TableColumn fx:id="viewSusTab_susDateCol" minWidth="50.0" prefWidth="125.0" text="Suspension Date" />
+                  <TableColumn fx:id="viewSusTab_susStatusCol" minWidth="50.0" prefWidth="107.0" text="Status" />
+              </columns>
+            </TableView>
+            <Button fx:id="editSalarySuspensionBtn" disable="true" layoutX="732.0" layoutY="443.0" mnemonicParsing="false" onContextMenuRequested="#editSalarySuspensionDetails" text="Edit" />
+            <Button fx:id="deleteSalarySuspensionBtn" disable="true" layoutX="810.0" layoutY="443.0" mnemonicParsing="false" onContextMenuRequested="#deleteSalarySuspensionDetails" text="Delete" />
+            <Button fx:id="printSuspensionButton" layoutX="886.0" layoutY="443.0" mnemonicParsing="false" onMouseClicked="#printSalarySuspension" text="Print" />
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>

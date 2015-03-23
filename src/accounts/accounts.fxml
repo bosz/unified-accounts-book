@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.net.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="585.0" prefWidth="1220.0" styleClass="mainFxmlClass" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="Tables.AccountsController">
+    <stylesheets>
+        <URL value="@/njieaccount/main.css" />
+    </stylesheets>
+   <children>
+      <Label layoutX="201.0" layoutY="29.0" text="Cashier/Manager Accounts Management Module" textFill="#952bbf">
+         <font>
+            <Font name="FreeMono Bold" size="37.0" />
+         </font>
+      </Label>
+  <AnchorPane id="accounts_anchor" layoutY="59.0" minHeight="0.0" minWidth="0.0" prefHeight="526.0" prefWidth="1220.0" stylesheets="@main.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="59.0">
+         <children>
+            <Button contentDisplay="TOP" layoutX="20.0" layoutY="31.0" mnemonicParsing="false" onMouseClicked="#displayAddNewManagerPane" styleClass=".button" stylesheets="@main.css" text="Add New Manager">
+               <graphic>
+                  <ImageView fitHeight="94.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@njie_img/add_user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" layoutX="32.0" layoutY="179.0" mnemonicParsing="false" onMouseClicked="#displayEditManagerPane" styleClass=".button" stylesheets="@main.css" text="Edit Account ">
+               <graphic>
+                  <ImageView fitHeight="94.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@njie_img/add_user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Button contentDisplay="TOP" layoutX="27.0" layoutY="335.0" mnemonicParsing="false" onMouseClicked="#displayDeleteManagerPane" styleClass=".button" stylesheets="@main.css" text="Delete Manager">
+               <graphic>
+                  <ImageView fitHeight="94.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@njie_img/add_user.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+            <Pane id="accounts_anchor" fx:id="defaultManagerPane" layoutX="282.0" layoutY="16.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css" visible="false">
+               <children>
+                  <Label layoutX="46.0" layoutY="14.0" text="Default Manager Accounts Page" textFill="#952bbf">
+                     <font>
+                        <Font name="FreeMono Bold" size="37.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane id="accounts_anchor" fx:id="addNewManagerPane" layoutX="282.0" layoutY="16.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css" visible="false">
+               <children>
+                  <Label layoutX="180.0" layoutY="14.0" text="Add New Manager" textFill="#952bbf">
+                     <font>
+                        <Font name="FreeMono Bold" size="37.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+            <Pane id="accounts_anchor" fx:id="editManagerInfoPane" layoutX="282.0" layoutY="16.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css">
+               <children>
+                  <Label layoutX="268.0" layoutY="14.0" text="Edit Info" textFill="#952bbf">
+                     <font>
+                        <Font name="FreeMono Bold" size="37.0" />
+                     </font>
+                  </Label>
+                  <TextField layoutX="222.0" layoutY="91.0">
+                     <font>
+                        <Font name="FreeMono Bold" size="26.0" />
+                     </font>
+                  </TextField>
+                  <TextField layoutX="222.0" layoutY="167.0">
+                     <font>
+                        <Font name="FreeMono Bold" size="26.0" />
+                     </font>
+                  </TextField>
+                  <PasswordField layoutX="222.0" layoutY="251.0">
+                     <font>
+                        <Font name="FreeMono Bold" size="26.0" />
+                     </font>
+                  </PasswordField>
+                  <PasswordField layoutX="198.0" layoutY="361.0">
+                     <font>
+                        <Font name="FreeMono Bold" size="26.0" />
+                     </font>
+                  </PasswordField>
+                  <Label layoutX="124.0" layoutY="106.0" text="Label" />
+               </children>
+            </Pane>
+            <Pane id="accounts_anchor" fx:id="deleteManagerInfoPane" layoutX="282.0" layoutY="16.0" prefHeight="449.0" prefWidth="736.0" style="-fx-border-color: green; -fx-border-radius: 10px;" stylesheets="@main.css" visible="false">
+               <children>
+                  <Label layoutX="222.0" layoutY="14.0" text="Delete Manager" textFill="#952bbf">
+                     <font>
+                        <Font name="FreeMono Bold" size="37.0" />
+                     </font>
+                  </Label>
+               </children>
+            </Pane>
+         </children>
+      </AnchorPane>
+   </children>
+</AnchorPane>

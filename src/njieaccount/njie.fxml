@@ -1,0 +1,2045 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="root_anchor" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="655.0" prefWidth="1220.0" stylesheets="@main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="njieaccount.NjieController">
+   <children>
+      <Pane fx:id="welcome_pane" layoutX="247.0" layoutY="79.0" prefHeight="558.0" prefWidth="729.0" styleClass="welcome_page" stylesheets="@main.css">
+         <children>
+            <ImageView fitHeight="251.0" fitWidth="326.0" layoutX="239.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@njie_img/1_home.png" />
+               </image>
+            </ImageView>
+            <Button layoutX="73.0" layoutY="412.0" mnemonicParsing="false" onMouseClicked="#loginAsCashier" text="login as Cashier" textFill="#326583">
+               <font>
+                  <Font name="FreeMono Bold" size="20.0" />
+               </font>
+            </Button>
+            <Pane layoutX="255.0" layoutY="291.0">
+               <children>
+                  <Label text="Username" textFill="#3d4072">
+                     <font>
+                        <Font name="FreeMono Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <Label layoutY="49.0" text="Password" textFill="#3d4072">
+                     <font>
+                        <Font name="FreeMono Bold" size="23.0" />
+                     </font>
+                  </Label>
+                  <TextField fx:id="usernameTxtFld" layoutX="127.0" promptText="username" />
+                  <PasswordField fx:id="passwordFld" layoutX="127.0" layoutY="49.0" promptText="password" />
+               </children>
+            </Pane>
+            <Button layoutX="404.0" layoutY="406.0" mnemonicParsing="false" onMouseClicked="#loginAsManager" text="Login as Manager" textFill="#326583">
+               <font>
+                  <Font name="FreeMono Bold" size="20.0" />
+               </font>
+               <graphic>
+                  <ImageView fitHeight="35.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@njie_img/key.png" />
+                     </image>
+                  </ImageView>
+               </graphic>
+            </Button>
+         </children>
+      </Pane>
+      <Pane id="accounts_anchor" fx:id="work_space" layoutY="37.0" prefHeight="618.0" prefWidth="1220.0" stylesheets="@main.css" visible="false">
+         <children>
+            <Button fx:id="close_daily_transaction" layoutX="794.0" layoutY="585.0" mnemonicParsing="false" onMouseClicked="#quit_to_home" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit" />
+            <Label layoutX="978.0" layoutY="581.0" text="Balance">
+               <font>
+                  <Font name="Droid Serif" size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="balance" layoutX="1082.0" layoutY="577.0" textFill="#9a1313">
+               <font>
+                  <Font name="FreeMono Bold" size="31.0" />
+               </font>
+            </Label>
+            <SplitPane dividerPositions="0.5" layoutY="21.0" prefHeight="558.0" prefWidth="1220.0" styleClass="income_and_expenditure_anchor" stylesheets="@main.css" AnchorPane.bottomAnchor="39.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="21.0">
+              <items>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="income_anchor" stylesheets="@main.css">
+                     <children>
+                        <Pane layoutX="3.0" layoutY="4.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: green; -fx-border-radius: 6;" AnchorPane.leftAnchor="3.0" AnchorPane.rightAnchor="2.0" AnchorPane.topAnchor="4.0">
+                           <children>
+                              <Text fill="#943434" fontSmoothingType="LCD" layoutX="34.0" layoutY="24.0" strokeType="OUTSIDE" strokeWidth="0.0" text="I n c o m e">
+                                 <font>
+                                    <Font name="FreeMono Bold" size="32.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </Pane>
+                        <TableView id="income_table" fx:id="income_table" editable="true" layoutX="7.0" layoutY="69.0" prefHeight="451.0" prefWidth="589.0" styleClass="table" stylesheets="@main.css">
+                          <columns>
+                            <TableColumn fx:id="col_inc_code" minWidth="30.0" prefWidth="159.0" text="Transaction Name" />
+                              <TableColumn fx:id="col_inc_memo" minWidth="30.0" prefWidth="243.0" text="Description(memo)" />
+                              <TableColumn fx:id="col_inc_amount" minWidth="30.0" prefWidth="182.0" text="Amount" />
+                          </columns>
+                        </TableView>
+                        <Button fx:id="income_add_transaction_main_button" layoutX="11.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_add_income_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Add transaction" />
+                        <Group layoutX="57.0" layoutY="-7.0">
+                           <children>
+                              <Label layoutX="278.0" layoutY="534.0" text="Total Income : ">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="20.0" />
+                                 </font>
+                                 <textFill>
+                                    <RadialGradient centerX="0.45505617977528096" centerY="0.5" radius="0.8809523809523809">
+                                       <stops>
+                                          <Stop color="#26234d" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </textFill>
+                              </Label>
+                              <Label fx:id="total_income_down" layoutX="447.0" layoutY="535.0" textFill="#a45b5b">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Group>
+                        <Pane fx:id="pane_add_income_transaction" layoutX="6.0" layoutY="103.0" prefHeight="101.0" prefWidth="589.0" style="-fx-border-color: green; -fx-background-color: white;" visible="false">
+                           <children>
+                              <ImageView fx:id="cancel_add_income_button" fitHeight="22.0" fitWidth="21.0" layoutX="567.0" layoutY="1.0" onMouseClicked="#cancel_add_income" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                              <ComboBox fx:id="input_income_code" layoutX="8.0" layoutY="28.0" prefHeight="25.0" prefWidth="131.0" />
+                              <TextField fx:id="input_income_memo" layoutX="147.0" layoutY="28.0" prefHeight="25.0" prefWidth="317.0" />
+                              <TextField fx:id="input_income_amount" layoutX="476.0" layoutY="26.0" prefHeight="25.0" prefWidth="106.0" />
+                              <Button fx:id="add_income_transaction_button" layoutX="510.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#add_income_transaction_to_database" text="Add">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0">
+                                       <image>
+                                          <Image url="@njie_img/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pane_custumer_pay_expense_Transaction" layoutX="8.0" layoutY="97.0" prefHeight="285.0" prefWidth="589.0" style="-fx-background-color: white; -fx-border-color: blue;" visible="false">
+                           <children>
+                              <Label layoutX="5.0" layoutY="3.0" text="Custumer Pay">
+                                 <font>
+                                    <Font name="FreeMono" size="13.0" />
+                                 </font>
+                              </Label>
+                              <AnchorPane layoutX="1.0" layoutY="23.0" minHeight="0.0" minWidth="0.0" prefHeight="262.0" prefWidth="583.0">
+                                 <children>
+                                    <ComboBox fx:id="input_supplierID_supplierPartPayment1" disable="true" editable="true" layoutX="90.0" layoutY="6.0" prefHeight="25.0" prefWidth="110.0" />
+                                    <Label disable="true" layoutX="7.0" layoutY="11.0" text="Cust ID" />
+                                    <Label layoutX="226.0" layoutY="11.0" text="Custumer's Name" />
+                                    <Button layoutX="521.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#search_customerDebt" text="Search" />
+                                    <Pane fx:id="pane_toReceive_debtPayment" layoutX="14.0" layoutY="39.0" prefHeight="189.0" prefWidth="563.0" style="-fx-border-color: blue;" visible="false">
+                                       <children>
+                                          <Label layoutX="190.0" layoutY="7.0" text="Custumer Debt Settlement" />
+                                          <Label layoutX="14.0" layoutY="49.0" text="Custumer ID" />
+                                          <Label layoutX="14.0" layoutY="133.0" text="Debt amount" />
+                                          <Label layoutX="283.0" layoutY="42.0" text="Amt Paid" />
+                                          <Label layoutX="283.0" layoutY="73.0" text="Amt Left" />
+                                          <Label layoutX="283.0" layoutY="102.0" text="Paying" />
+                                          <Label layoutX="282.0" layoutY="131.0" text="Balance" />
+                                          <Label fx:id="debt_output_TotalDebtAmt" layoutX="134.0" layoutY="134.0" text="230 000" />
+                                          <Label fx:id="debt_output_custId" layoutX="134.0" layoutY="50.0" text="1001" />
+                                          <Label fx:id="debt_output_debtAmtPaid" layoutX="383.0" layoutY="43.0" text="130 000" />
+                                          <Label fx:id="pay_and_getBal_debt" layoutX="379.0" layoutY="131.0" text="0" />
+                                          <Label fx:id="debt_output_balanceDebtAmt" layoutX="380.0" layoutY="73.0" text="100 000" />
+                                          <Label layoutX="279.0" layoutY="164.0" text="Signed Cashier : ________________________" />
+                                          <TextField fx:id="debt_ouIn_balanceDebt" layoutX="342.0" layoutY="97.0" prefHeight="25.0" prefWidth="72.0" text="200 000" />
+                                       </children>
+                                    </Pane>
+                                    <Button layoutX="471.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#pay_debt_writeToDatabase" text="Pay and print" />
+                                    <ComboBox fx:id="input_supplierName_supplierPayment1" layoutX="345.0" layoutY="6.0" prefWidth="150.0" />
+                                 </children>
+                              </AnchorPane>
+                              <ImageView fx:id="cancel_add_expenditure_button12" fitHeight="22.0" fitWidth="21.0" layoutX="564.0" layoutY="3.0" onMouseClicked="#cancel_add_expenditure" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Button fx:id="income_custumer_transaction_main_button" layoutX="157.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_customer_income_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Custumer Payback" />
+                     </children>
+                  </AnchorPane>
+                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0" styleClass="expenditure_anchor" stylesheets="@main.css">
+                     <children>
+                        <Pane layoutX="2.0" layoutY="3.0" prefHeight="30.0" prefWidth="600.0" style="-fx-border-color: green; -fx-border-radius: 6;" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="3.0">
+                           <children>
+                              <Text fill="#943434" fontSmoothingType="LCD" layoutX="34.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Expenditure">
+                                 <font>
+                                    <Font name="FreeMono Bold" size="32.0" />
+                                 </font>
+                              </Text>
+                              <Label layoutX="376.0" layoutY="7.0" text="Total Income">
+                                 <font>
+                                    <Font name="Lucida Bright Demibold" size="19.0" />
+                                 </font>
+                              </Label>
+                              <Label fx:id="total_income_up" layoutX="518.0" layoutY="7.0">
+                                 <font>
+                                    <Font name="Lucida Bright Demibold" size="19.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <HBox alignment="CENTER" layoutX="10.0" layoutY="38.0" prefHeight="25.0" prefWidth="433.0">
+                           <children>
+                              <Button fx:id="expenditure_add_transaction_main_button" layoutX="10.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_add_expenditure_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Normal">
+                                 <HBox.margin>
+                                    <Insets right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="purchases_add_transaction_main_button" layoutX="156.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_paySupplier_expenditure_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Pay Supplier.">
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="payroll_add_transaction_main_button" layoutX="311.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_add_payroll_expenditure_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Payroll">
+                                 <HBox.margin>
+                                    <Insets left="20.0" right="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                              <Button fx:id="overdraft_add_transaction_main_button1" layoutX="462.0" layoutY="41.0" mnemonicParsing="false" onMouseClicked="#display_add_overdraft_expenditure_transaction_form" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Overdraft">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin>
+                              </Button>
+                           </children>
+                        </HBox>
+                        <TableView id="expenditure_table" fx:id="expenditure_table" editable="true" layoutX="9.0" layoutY="69.0" prefHeight="451.0" prefWidth="589.0" styleClass="table" stylesheets="@main.css">
+                           <columns>
+                              <TableColumn fx:id="col_exp_code" minWidth="30.0" prefWidth="175.0" text="Transaction Name" />
+                              <TableColumn fx:id="col_exp_memo" minWidth="30.0" prefWidth="224.0" text="Description(memo)" />
+                              <TableColumn fx:id="col_exp_amount" minWidth="30.0" prefWidth="188.0" text="Amount" />
+                           </columns>
+                        </TableView>
+                        <Group layoutX="64.0" layoutY="-5.0">
+                           <children>
+                              <Label layoutX="228.0" layoutY="535.0" text="Total Expenditure : ">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="20.0" />
+                                 </font>
+                                 <textFill>
+                                    <RadialGradient centerX="0.45505617977528096" centerY="0.5" radius="0.8809523809523809">
+                                       <stops>
+                                          <Stop color="#26234d" />
+                                          <Stop color="WHITE" offset="1.0" />
+                                       </stops>
+                                    </RadialGradient>
+                                 </textFill>
+                              </Label>
+                              <Label fx:id="total_expenditure_down" layoutX="447.0" layoutY="535.0" textFill="#a45b5b">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="20.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Group>
+                        <Pane fx:id="pane_add_expendure_transaction" layoutX="9.0" layoutY="103.0" prefHeight="101.0" prefWidth="589.0" style="-fx-background-color: white;" visible="false">
+                           <children>
+                              <ImageView fx:id="cancel_add_expenditure_button" fitHeight="22.0" fitWidth="21.0" layoutX="560.0" layoutY="5.0" onMouseClicked="#cancel_add_expenditure" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                              <ComboBox fx:id="input_expenditure_code" layoutX="7.0" layoutY="28.0" prefHeight="25.0" prefWidth="131.0" />
+                              <TextField fx:id="input_expenditure_memo" layoutX="146.0" layoutY="28.0" prefHeight="25.0" prefWidth="323.0" />
+                              <TextField fx:id="input_expenditure_amount" layoutX="475.0" layoutY="27.0" onKeyTyped="#validateInput" prefHeight="25.0" prefWidth="110.0" />
+                              <Button fx:id="add_expenditure_transaction_button" layoutX="509.0" layoutY="62.0" mnemonicParsing="false" onMouseClicked="#add_expenditure_transaction_to_database" text="Add">
+                                 <graphic>
+                                    <ImageView fitHeight="25.0" fitWidth="25.0">
+                                       <image>
+                                          <Image url="@njie_img/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Label layoutX="5.0" layoutY="3.0" text="Normal Expenses">
+                                 <font>
+                                    <Font name="FreeMono" size="13.0" />
+                                 </font>
+                              </Label>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pane_add_purchase_expense_Transaction" layoutX="9.0" layoutY="103.0" prefHeight="315.0" prefWidth="589.0" style="-fx-background-color: white;" visible="false">
+                           <children>
+                              <Label layoutX="5.0" layoutY="3.0" text="Purchase Expenses">
+                                 <font>
+                                    <Font name="FreeMono" size="13.0" />
+                                 </font>
+                              </Label>
+                              <TabPane layoutY="22.0" prefHeight="296.0" prefWidth="589.0" tabClosingPolicy="UNAVAILABLE">
+                                <tabs>
+                                  <Tab text="Supplier part payment">
+                                    <content>
+                                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                                             <children>
+                                                <ComboBox fx:id="input_supplierID_supplierPartPayment" disable="true" editable="true" layoutX="90.0" layoutY="6.0" prefHeight="25.0" prefWidth="110.0" />
+                                                <Label disable="true" layoutX="7.0" layoutY="11.0" text="Supplier ID" />
+                                                <Label layoutX="236.0" layoutY="11.0" text="Supplier Name" />
+                                                <Button fx:id="searchSup" layoutX="521.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#search_supplierPartPayment" text="Search" />
+                                                <Pane fx:id="pane_toMake_supplierPartPayment" layoutX="14.0" layoutY="39.0" prefHeight="189.0" prefWidth="563.0" style="-fx-border-color: blue;" visible="false">
+                                                   <children>
+                                                      <Label layoutX="190.0" layoutY="7.0" text="SupplierName Part Payment" />
+                                                      <Label layoutX="14.0" layoutY="49.0" text="Supplier ID" />
+                                                      <Label layoutX="14.0" layoutY="76.0" text="Supplier Name" />
+                                                      <Label layoutX="14.0" layoutY="133.0" text="Payment Issued" />
+                                                      <Label layoutX="283.0" layoutY="42.0" text="Amt Paid" />
+                                                      <Label layoutX="283.0" layoutY="73.0" text="Amt Left" />
+                                                      <Label layoutX="283.0" layoutY="102.0" text="Paying" />
+                                                      <Label layoutX="282.0" layoutY="131.0" text="Balance" />
+                                                      <Label fx:id="totalamtIssuedToSupplier" layoutX="134.0" layoutY="134.0" text="230 000" />
+                                                      <Label fx:id="pay_suplierID" layoutX="134.0" layoutY="50.0" text="1001" />
+                                                      <Label fx:id="amt_alreadyPait_toSupplier" layoutX="383.0" layoutY="43.0" text="130 000" />
+                                                      <Label fx:id="pay_SupplierName" layoutX="134.0" layoutY="77.0" text="Floriska" />
+                                                      <Label fx:id="supplierPayment_balace" layoutX="379.0" layoutY="131.0" text="0" />
+                                                      <Label fx:id="maxAmt_toPay_supplier" layoutX="380.0" layoutY="73.0" prefHeight="17.0" prefWidth="59.0" text="100 000" />
+                                                      <Label layoutX="279.0" layoutY="164.0" text="Signed Cashier : ________________________" />
+                                                      <TextField fx:id="input_paying_supplierPayment" layoutX="342.0" layoutY="97.0" onKeyTyped="#update_supplierPartPayment_balance" prefHeight="25.0" prefWidth="72.0" />
+                                                   </children>
+                                                </Pane>
+                                                <Button fx:id="payPrintSupplier" layoutX="471.0" layoutY="230.0" mnemonicParsing="false" onMouseClicked="#pay_supplierPartPayment" text="Pay and print" />
+                                                <ComboBox fx:id="input_supplierName_supplierPayment" layoutX="345.0" layoutY="6.0" onAction="#deactivateToSearch" prefWidth="150.0" />
+                                             </children></AnchorPane>
+                                    </content>
+                                  </Tab>
+                                </tabs>
+                              </TabPane>
+                              <ImageView fx:id="cancel_add_expenditure_button1" fitHeight="22.0" fitWidth="21.0" layoutX="564.0" layoutY="3.0" onMouseClicked="#cancel_add_expenditure" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pane_add_payroll_expense_Transaction" layoutX="9.0" layoutY="103.0" prefHeight="315.0" prefWidth="589.0" style="-fx-background-color: white; -fx-border-color: blue;" visible="false">
+                           <children>
+                              <ImageView fx:id="cancel_add_expenditure_button11" fitHeight="22.0" fitWidth="21.0" layoutX="560.0" layoutY="5.0" onMouseClicked="#cancel_add_expenditure" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="5.0" layoutY="3.0" text="Payroll Expenses">
+                                 <font>
+                                    <Font name="FreeMono" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label layoutX="20.0" layoutY="26.0" text="Staff ID" />
+                              <Label layoutX="211.0" layoutY="26.0" text="Staff Name" />
+                              <Pane fx:id="pane_payrollFor_aStaff" layoutX="14.0" layoutY="51.0" prefHeight="220.0" prefWidth="563.0" style="-fx-border-color: blue; -fx-background-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="256.0" layoutY="7.0" text="Pay Slip" />
+                                    <Label layoutX="24.0" layoutY="81.0" text="Staff Name" />
+                                    <Label layoutX="24.0" layoutY="50.0" text="Staff ID" />
+                                    <Label layoutX="285.0" layoutY="41.0" text="Monthly salary" />
+                                    <Label layoutX="285.0" layoutY="72.0" text="Amount Collected" visible="false" />
+                                    <Label layoutX="285.0" layoutY="102.0" text="Overdraft" />
+                                    <Label layoutX="285.0" layoutY="137.0" text="Amt to collect" />
+                                    <Label layoutX="285.0" layoutY="169.0" text="Month's Balance" />
+                                    <Label layoutX="294.0" layoutY="199.0" text="Signed Cashier : _____________________" />
+                                    <Label fx:id="PayRoll_output_staffID" layoutX="143.0" layoutY="50.0" />
+                                    <Label fx:id="PayRoll_output_staffName" layoutX="143.0" layoutY="81.0" />
+                                    <Label fx:id="PayRoll_output_monthlySalary" layoutX="425.0" layoutY="41.0" />
+                                    <Label fx:id="PayRoll_output_salaryAmtCollected" layoutX="429.0" layoutY="72.0" text="50 000" visible="false" />
+                                    <Label fx:id="PayRoll_output_ovMontlyDeduction" layoutX="429.0" layoutY="104.0" />
+                                    <TextField fx:id="input_payrollAmtToCollect" layoutX="408.0" layoutY="132.0" prefHeight="25.0" prefWidth="101.0" promptText="200 000" />
+                                    <Label fx:id="label_payroll_balance" layoutX="425.0" layoutY="169.0" text="0" />
+                                 </children>
+                              </Pane>
+                              <Button fx:id="pay_employee_button" layoutX="468.0" layoutY="272.0" mnemonicParsing="false" onMouseClicked="#payandPrint_payroll" text="Pay and print" />
+                              <Button fx:id="search_payroll_button" layoutX="459.0" layoutY="21.0" mnemonicParsing="false" onMouseClicked="#search_employeeFor_payroll" text="Search" />
+                              <ComboBox fx:id="input_staffName_payroll" disable="true" layoutX="284.0" layoutY="21.0" prefHeight="25.0" prefWidth="133.0" />
+                              <TextField fx:id="input_staffID_payroll" layoutX="70.0" layoutY="21.0" prefHeight="25.0" prefWidth="114.0" />
+                           </children>
+                        </Pane>
+                        <Pane fx:id="pane_add_overdraft_expense_Transaction" layoutX="9.0" layoutY="103.0" prefHeight="234.0" prefWidth="589.0" style="-fx-background-color: white;" visible="false">
+                           <children>
+                              <ImageView fx:id="cancel_add_expenditure_button111" fitHeight="22.0" fitWidth="21.0" layoutX="560.0" layoutY="5.0" onMouseClicked="#cancel_add_expenditure" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@njie_img/cancel.png" />
+                                 </image>
+                              </ImageView>
+                              <Label layoutX="5.0" layoutY="3.0" text="Overdraft Expenses">
+                                 <font>
+                                    <Font name="FreeMono" size="13.0" />
+                                 </font>
+                              </Label>
+                              <Label disable="true" layoutX="32.0" layoutY="26.0" text="Staff Name" />
+                              <Label layoutX="235.0" layoutY="27.0" text="Staff Code" />
+                              <Pane fx:id="valid_overdraft_pane" layoutX="14.0" layoutY="57.0" prefHeight="134.0" prefWidth="563.0" style="-fx-border-color: blue;">
+                                 <children>
+                                    <Label layoutX="219.0" layoutY="7.0" text="Overdraft payment" />
+                                    <Label layoutX="8.0" layoutY="36.0" text="Staff ID" />
+                                    <Label layoutX="8.0" layoutY="60.0" text="Staff Name" />
+                                    <Label layoutX="297.0" layoutY="36.0" text="Overdraft Amount" />
+                                    <Label layoutX="297.0" layoutY="60.0" text="Monthly Deduction" />
+                                    <Label layoutX="297.0" layoutY="86.0" text="Deduction Until" />
+                                    <Label layoutX="356.0" layoutY="113.0" text="Signed Casshier: _____________" />
+                                    <Label fx:id="OD_output_staffID" layoutX="110.0" layoutY="36.0" text="TE01AD12" />
+                                    <Label fx:id="OD_output_staffName" layoutX="110.0" layoutY="60.0" text="Fongoh Tayong" />
+                                    <Label fx:id="OD_output_AmtToPay" layoutX="455.0" layoutY="36.0" text="100 000" />
+                                    <Label fx:id="OD_output_monthlyDeduction" layoutX="455.0" layoutY="60.0" text="10 000" />
+                                    <Label fx:id="OD_output_deductUntil" layoutX="455.0" layoutY="86.0" text="January 2015" />
+                                 </children>
+                              </Pane>
+                              <TextField fx:id="input_staffID_overdraft" disable="true" layoutX="89.0" layoutY="22.0" prefHeight="25.0" prefWidth="140.0" />
+                              <Button layoutX="476.0" layoutY="22.0" mnemonicParsing="false" onMouseClicked="#searchFor_valid_overdraft_button" text="Search" />
+                              <Button fx:id="payPrint_overdraft" layoutX="465.0" layoutY="199.0" mnemonicParsing="false" onMouseClicked="#payPrint_overdraft" text="pay and print" />
+                              <TextField fx:id="input_staffName_overdraft" layoutX="305.0" layoutY="22.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+              </items>
+            </SplitPane>
+            <Hyperlink fx:id="quit" layoutX="1151.0" layoutY="2.0" onMouseClicked="#display_standby_window" text="Standby" textFill="#62663d" visible="false" />
+         </children>
+      </Pane>
+      <Label layoutX="314.0" layoutY="6.0" text="N J E I F O R B I      A C C O U N T S    B O O K" textFill="#6f2020">
+         <font>
+            <Font name="Bitstream Vera Sans Bold" size="26.0" />
+         </font>
+         <effect>
+            <Bloom threshold="0.0">
+               <input>
+                  <Lighting>
+                     <bumpInput>
+                        <Shadow />
+                     </bumpInput>
+                     <light>
+                        <Light.Distant />
+                     </light>
+                  </Lighting>
+               </input>
+            </Bloom>
+         </effect>
+         <cursor>
+            <Cursor fx:constant="DISAPPEAR" />
+         </cursor>
+         <graphic>
+            <ImageView fitHeight="34.0" fitWidth="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@njie_img/jnie.png" />
+               </image>
+            </ImageView>
+         </graphic>
+      </Label>
+      <Pane id="accounts_anchor" fx:id="admin_space" layoutY="37.0" prefHeight="618.0" prefWidth="1220.0" stylesheets="@main.css" visible="false">
+         <children>
+            <TabPane layoutX="-2.0" layoutY="1.0" prefHeight="618.0" prefWidth="1220.0" style="-fx-background-color: linear-gradient(to right, rgba(242,246,248,1) 0%, rgba(216,225,231,0.59) 11%, rgba(216,225,231,0.44) 15%, rgba(216,225,231,0.85) 26%, rgba(210,221,227,1) 30%, rgba(181,198,208,0.52) 51%, rgba(192,209,219,0.22) 64%, rgba(199,216,226,1) 72%, rgba(215,231,241,0.22) 90%, rgba(224,239,249,0.22) 100%);;" tabClosingPolicy="UNAVAILABLE">
+              <tabs>
+                <Tab fx:id="activate_defaultManager_transaction" onSelectionChanged="#activate_defaultManager_transaction" text="Manage Transactions">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="162.0">
+                           <children>
+                              <Group>
+                                 <children>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="111.0" mnemonicParsing="false" onMouseClicked="#manager_addTransaction" prefHeight="107.0" prefWidth="117.0" text="Add Transaction" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="309.0" mnemonicParsing="false" onMouseClicked="#manager_viewTransaction" prefHeight="107.0" prefWidth="117.0" text="View Transaction" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Group>
+                              <Pane fx:id="manager_addTransaction" layoutX="293.0" layoutY="24.0" prefHeight="538.0" prefWidth="634.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="68.0" layoutY="47.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font></Label>
+                                    <Label layoutX="74.0" layoutY="131.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font></Label>
+                                    <Label layoutX="74.0" layoutY="282.0" text="Description">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font></Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Add Transaction" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="addTransClassCodeTxtFld" layoutX="285.0" layoutY="45.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></TextField>
+                                    <TextField fx:id="addTransClassNameTxtFld" layoutX="285.0" layoutY="129.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect></TextField>
+                                    <TextArea fx:id="addTransClassDescTxtA" layoutX="285.0" layoutY="277.0" prefHeight="169.0" prefWidth="304.0" />
+                                    <Button layoutX="488.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#addTransClass" text="Add" textFill="#fffefe">
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="23.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Label layoutX="74.0" layoutY="204.0" text="Type">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="addTransClassTypeCombx" editable="true" layoutX="285.0" layoutY="199.0" prefHeight="35.0" prefWidth="300.0" promptText="income   /   expenditure">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </ComboBox>
+                                    <Label fx:id="addTransClassResponse" layoutX="217.0" layoutY="456.0" prefHeight="60.0" prefWidth="226.0" text="::" wrapText="true" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_viewTransactions" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;">
+                                 <children>
+                                    <Label layoutX="35.0" layoutY="47.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="301.0" layoutY="47.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="269.0" layoutY="1.0" text="View Transaction Infos" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField layoutX="101.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <TextField layoutX="361.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <Button layoutX="571.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Search" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TableView fx:id="viewTransClass_table" layoutX="16.0" layoutY="39.0" prefHeight="378.0" prefWidth="867.0">
+                                       <columns>
+                                          <TableColumn fx:id="viewTransClass_Tcode" prefWidth="118.0" text="Code" />
+                                          <TableColumn fx:id="viewTransClass_Tname" prefWidth="187.0" text="Name" />
+                                          <TableColumn fx:id="viewTransClass_Tdesc" prefWidth="559.0" text="Description" />
+                                       </columns>
+                                    </TableView>
+                                    <Hyperlink layoutX="14.0" layoutY="10.0" onMouseClicked="#viewExpTransClass" text="Expense" />
+                                    <Hyperlink layoutX="98.0" layoutY="10.0" onMouseClicked="#viewIncTransClass" text="Income" />
+                                    <Label fx:id="vInvExp" layoutX="684.0" layoutY="1.0" prefHeight="29.0" prefWidth="170.0" text=":" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Group fx:id="infoEditingGroup1">
+                                       <children>
+                                          <Button layoutX="711.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_deleteTransClass" text="Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/delete_red.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button layoutX="804.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_editTransClass" text="Edit">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/edit.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Pane fx:id="miniPaneForTransClass" layoutX="26.0" layoutY="459.0">
+                                             <children>
+                                                <TextField fx:id="input_EDIT_transClass_Desc" layoutX="400.0" layoutY="23.0" prefHeight="25.0" prefWidth="454.0" />
+                                                <Label layoutX="579.0" layoutY="3.0" text="Description" />
+                                                <Label layoutX="33.0" layoutY="3.0" text="transaction id" />
+                                                <TextField fx:id="input_EDIT_transClass_transName" layoutX="182.0" layoutY="23.0" />
+                                                <Button layoutX="733.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#updateTransClassInformation" text="Update">
+                                                   <graphic>
+                                                      <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@njie_img/agt_action_success.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <TextField fx:id="input_EDIT_transClass_transID" layoutX="30.0" layoutY="23.0" prefHeight="25.0" prefWidth="96.0" />
+                                                <Label layoutX="208.0" layoutY="3.0" text="Transaction Name" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Group>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_default_display" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Button contentDisplay="TOP" layoutX="89.0" layoutY="79.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Adding a transaction for it to be used by the cashier to perform daily dealings affecting income and expenditure" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/Workgroup_white.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="235.0" layoutY="184.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="edit existing transaction changing the name and the description" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="244.0" layoutY="404.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="View all transaction classes and the details attached to them." textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/Search-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="160.0" layoutY="295.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Delete transaction classes that are not of use again or are not being used by the company" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Button fx:id="close_daily_transaction1" layoutX="1168.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#leave_manager" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit" />
+                           </children>
+                        </AnchorPane>
+                  </content>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/Workgroup.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Tab>
+                <Tab onSelectionChanged="#activate_defaultManager_addStaff" text="Staff Management">
+                  <content>
+                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to right, rgba(242,246,248,1) 0%, rgba(227,234,238,0.44) 15%, rgba(216,225,231,0.85) 26%, rgba(216,225,231,0.85) 26%, rgba(210,221,227,1) 30%, rgba(181,198,208,0.44) 51%, rgba(192,208,218,0.12) 63%, rgba(192,209,219,0.22) 64%, rgba(199,216,226,1) 72%, rgba(224,239,249,1) 100%);;">
+                           <children>
+                              <Button fx:id="close_daily_transaction13" layoutX="1154.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#leave_manager" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/quit.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Pane fx:id="manager_addStaff" layoutX="301.0" layoutY="24.0" prefHeight="538.0" prefWidth="634.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="68.0" layoutY="47.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="131.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="282.0" text="Salary">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Add Staff" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="addStaff_codeTxtFld" layoutX="285.0" layoutY="45.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <TextField fx:id="addStaff_nameTxtFlx" layoutX="285.0" layoutY="129.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <Button layoutX="488.0" layoutY="456.0" mnemonicParsing="false" onMouseClicked="#addStaff" text="Add" textFill="#fffefe">
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="23.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Label layoutX="74.0" layoutY="204.0" text="Branch">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <ComboBox fx:id="addStaff_branchCmbBx" editable="true" layoutX="285.0" layoutY="199.0" prefHeight="35.0" prefWidth="300.0" promptText="income   /   expenditure">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </ComboBox>
+                                    <Label fx:id="addStaff_response" layoutX="217.0" layoutY="456.0" prefHeight="60.0" prefWidth="226.0" text="::" wrapText="true" />
+                                    <TextField fx:id="addStaff_salaryTxtFlx" layoutX="285.0" layoutY="277.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <Label layoutX="75.0" layoutY="360.0" text="Phone Number">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="addStaff_phoneTxtFlx1" layoutX="286.0" layoutY="355.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                 </children>
+                              </Pane>
+                              <Group>
+                                 <children>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#manager_editStaff" prefHeight="107.0" prefWidth="117.0" text="Edit staff Info" textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/interact.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="92.0" mnemonicParsing="false" onMouseClicked="#manager_addStaff" prefHeight="107.0" prefWidth="117.0" text="Add Staff" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="71.0" fitWidth="84.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add_user.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#manager_deleteStaff" prefHeight="107.0" prefWidth="117.0" text="Delete Staff " textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="314.0" mnemonicParsing="false" onMouseClicked="#manager_viewStaff" prefHeight="107.0" prefWidth="117.0" text="View Staff info" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/user-info-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Group>
+                              <Pane fx:id="manager_viewStaff" layoutX="301.0" layoutY="24.0" prefHeight="538.0" prefWidth="859.0" style="-fx-border-color: white;">
+                                 <children>
+                                    <Label layoutX="289.0" text="View Staff Information" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="viewStaff_table" layoutX="14.0" layoutY="38.0" prefHeight="383.0" prefWidth="826.0">
+                                      <columns>
+                                        <TableColumn fx:id="viewStaff_code_col" prefWidth="127.0" text="Staff Code" />
+                                        <TableColumn fx:id="viewStaff_name_col" prefWidth="210.0" text="Name" />
+                                          <TableColumn fx:id="viewStaff_phone_col" prefWidth="152.0" text="Phone Number" />
+                                          <TableColumn fx:id="viewStaff_salary_col" prefWidth="176.0" text="Salary" />
+                                          <TableColumn fx:id="viewStaff_branch_col" prefWidth="158.0" text="Branch" />
+                                      </columns>
+                                    </TableView>
+                                    <Group fx:id="infoEditingGroup">
+                                       <children>
+                                          <Button layoutX="678.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#mini_deleteStaff" text="Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/delete_red.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button layoutX="771.0" layoutY="428.0" mnemonicParsing="false" onMouseClicked="#mini_editStaff" text="Edit">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/edit.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Pane fx:id="miniPaneForStaffEdit" layoutX="26.0" layoutY="459.0">
+                                             <children>
+                                                <ComboBox fx:id="input_EDIT_staff_branch" layoutX="345.0" layoutY="23.0" prefWidth="150.0" />
+                                                <TextField fx:id="input_EDIT_staff_salary" layoutX="536.0" layoutY="23.0" prefHeight="25.0" prefWidth="133.0" />
+                                                <Label layoutX="579.0" layoutY="3.0" text="salary" />
+                                                <Label layoutX="30.0" text="Staff id" />
+                                                <TextField fx:id="input_EDIT_staff_staffName" layoutX="127.0" layoutY="23.0" />
+                                                <Label layoutX="705.0" layoutY="3.0" text="phone number" />
+                                                <TextField fx:id="input_EDIT_staff_phoneNumber" layoutX="686.0" layoutY="23.0" prefHeight="25.0" prefWidth="133.0" />
+                                                <Label layoutX="397.0" text="branch" />
+                                                <Button layoutX="733.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#updateStaffInformation" text="Update">
+                                                   <graphic>
+                                                      <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@njie_img/agt_action_success.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <TextField fx:id="input_EDIT_staff_staffID" layoutY="23.0" prefHeight="25.0" prefWidth="96.0" />
+                                                <Label layoutX="182.0" text="Staff name" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Group>
+                                    <ImageView fitHeight="15.0" fitWidth="8.0" layoutX="619.0" layoutY="504.0" pickOnBounds="true" preserveRatio="true" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_defaultStaff" layoutX="301.0" layoutY="24.0" prefHeight="538.0" prefWidth="859.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="208.0" layoutY="1.0" text="staff information Home page" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children></AnchorPane>
+                  </content>
+                     <graphic>
+                        <ImageView fitHeight="28.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/staff.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                </Tab>
+                  <Tab fx:id="activate_defaultManager_transaction1" onSelectionChanged="#activate_defaultManager_Supplier" text="Manage Suppliers">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="162.0">
+                           <children>
+                              <Button contentDisplay="TOP" layoutX="59.0" layoutY="6.0" mnemonicParsing="false" onMouseClicked="#manager_addSupplier" prefHeight="123.0" prefWidth="117.0" text="Add Supplier" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/add.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="TOP" layoutX="59.0" layoutY="405.0" mnemonicParsing="false" onMouseClicked="#manager_viewSupplier" prefHeight="117.0" prefWidth="117.0" text="View Supplier infos" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/search-icon(2).png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manager_addSupplier" layoutX="293.0" layoutY="6.0" prefHeight="556.0" prefWidth="634.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="68.0" layoutY="67.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="181.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="302.0" text="Services">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Add Supplier" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="add_supplierCodeTxtFld" layoutX="285.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <TextField fx:id="add_supplierNameTxtFld" layoutX="285.0" layoutY="179.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <TextArea fx:id="add_supplierServiceTxtFld" layoutX="285.0" layoutY="297.0" prefHeight="169.0" prefWidth="304.0" />
+                                    <Button layoutX="488.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#addSupplier_to_database" text="Add" textFill="#fffefe">
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="23.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="addSupplier_response" layoutX="317.0" layoutY="501.0" text="::" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_viewSupplier" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="35.0" layoutY="48.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="301.0" layoutY="47.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="331.0" layoutY="-1.0" prefHeight="40.0" prefWidth="251.0" text="View Supplier Infos" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField layoutX="101.0" layoutY="46.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <TextField layoutX="361.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <Button layoutX="571.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Search" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TableView fx:id="viewSuppierInfo" layoutX="16.0" layoutY="30.0" prefHeight="389.0" prefWidth="867.0">
+                                       <columns>
+                                          <TableColumn fx:id="col_sup_code" prefWidth="118.0" text="Code" />
+                                          <TableColumn fx:id="col_supName" prefWidth="187.0" text="Name" />
+                                          <TableColumn fx:id="col_supServices" prefWidth="556.0" text="Services" />
+                                       </columns>
+                                    </TableView>
+                                    <Group fx:id="infoEditingGroup11">
+                                       <children>
+                                          <Button layoutX="711.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_deleteSupplier" text="Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/delete_red.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button layoutX="804.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_editSupplier" text="Edit">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/edit.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Pane fx:id="miniPaneForSupplier" layoutX="26.0" layoutY="459.0">
+                                             <children>
+                                                <TextField fx:id="input_EDIT_supplier_service" layoutX="400.0" layoutY="23.0" prefHeight="25.0" prefWidth="454.0" />
+                                                <Label layoutX="579.0" layoutY="3.0" text="Services" />
+                                                <Label layoutX="33.0" layoutY="3.0" text="supplier code" />
+                                                <TextField fx:id="input_EDIT_supplier_Name" layoutX="182.0" layoutY="23.0" />
+                                                <Button layoutX="733.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#updateSupplierInformation" text="Update">
+                                                   <graphic>
+                                                      <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@njie_img/agt_action_success.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <TextField fx:id="input_EDIT_supplier_ID" layoutX="30.0" layoutY="23.0" prefHeight="25.0" prefWidth="96.0" />
+                                                <Label layoutX="208.0" layoutY="3.0" text="Supplier Name" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Group>
+                                 </children>
+                              </Pane>
+                              <Button contentDisplay="TOP" layoutX="59.0" layoutY="135.0" mnemonicParsing="false" onMouseClicked="#manager_Supplier_issuePayment" prefHeight="122.0" prefWidth="117.0" text="issue payment" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/debt.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manager_Supplier_issuePayment" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Pane layoutX="198.0" layoutY="69.0" prefHeight="374.0" prefWidth="439.0" style="-fx-border-color: white;">
+                                       <children>
+                                          <Label layoutX="43.0" layoutY="73.0" prefHeight="53.0" prefWidth="115.0" text="Supplier's Code" wrapText="true">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font></Label>
+                                          <Label layoutX="43.0" layoutY="208.0" text="Amount">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font></Label>
+                                          <ComboBox fx:id="supplierCode_issuePayCmbox" layoutX="194.0" layoutY="84.0" prefHeight="30.0" prefWidth="200.0">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </ComboBox>
+                                          <TextField fx:id="issuePay_amtTxtFld" layoutX="194.0" layoutY="197.0" prefHeight="30.0" prefWidth="200.0">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </TextField>
+                                          <Button layoutX="241.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#manager_issue_suppPay" style="-fx-background-color: transparent;" text="Issue Payment">
+                                             <graphic>
+                                                <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/accountcreation-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor></Button>
+                                          <Label layoutX="136.0" layoutY="5.0" text="Issue Payment Order">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Button fx:id="close_daily_transaction11" layoutX="1154.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#leave_manager" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/quit.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button fx:id="btnDiplayViewSupplierIssuedPaymentsPane" contentDisplay="TOP" layoutX="59.0" layoutY="272.0" mnemonicParsing="false" onAction="#diplayViewSupplierIssuedPaymentsPane" prefHeight="122.0" prefWidth="125.0" text="Edit Issued Payments" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/interact.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manaageSupplierEditPane" layoutX="240.0" layoutY="18.0" prefHeight="558.0" prefWidth="921.0" style="-fx-border-color: blue;">
+                                 <children>
+                                    <TableView fx:id="manageSuppliertableView" layoutX="2.0" layoutY="66.0" prefHeight="451.0" prefWidth="908.0">
+                                       <columns>
+                                          <TableColumn fx:id="manageSupplierIDColumn" minWidth="0.0" prefWidth="2.0" text="id" />
+                                          <TableColumn fx:id="manageSupplierAmountColumn" prefWidth="255.0" text="Amount " />
+                                          <TableColumn fx:id="manageSupplierDateColumn" prefWidth="285.0" text="Date  " />
+                                          <TableColumn fx:id="manageSupplierNameColumn" prefWidth="362.0" text="Name" />
+                                       </columns>
+                                    </TableView>
+                                    <Button fx:id="btnEditmanageSupplierInfo" layoutX="722.0" layoutY="523.0" mnemonicParsing="false" onAction="#updateSupplierAmountAndNameInfo" prefHeight="26.0" prefWidth="87.0" text="Edit">
+                                       <graphic>
+                                          <ImageView fitHeight="17.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic></Button>
+                                    <Pane fx:id="editSupplierAmountAndName" layoutX="2.0" layoutY="56.0" prefHeight="145.0" prefWidth="908.0" style="-fx-border-color: blue; -fx-background-color: white;" visible="false">
+                                       <children>
+                                          <TextField fx:id="editmanageSupplierAmountTextField" layoutX="8.0" layoutY="38.0" prefHeight="25.0" prefWidth="219.0" promptText="eneter the amount" />
+                                          <ComboBox fx:id="editmanageSupplierAmountComboBox" layoutX="541.0" layoutY="38.0" prefHeight="25.0" prefWidth="293.0" promptText="select supplier name " />
+                                          <Button fx:id="btnSaveSupplierUpdateInfo" layoutX="266.0" layoutY="93.0" mnemonicParsing="false" onAction="#saveSupplierUpdateInformation" prefHeight="38.0" prefWidth="70.0" text="Save" />
+                                          <Button fx:id="btnCancelSupplierUpdate" layoutX="390.0" layoutY="93.0" mnemonicParsing="false" onAction="#cancelSupplierUpdate" prefHeight="38.0" prefWidth="70.0" text="Cancel" />
+                                          <Label fx:id="choosenSupplierLabel" layoutX="263.0" layoutY="14.0" prefHeight="30.0" prefWidth="251.0" />
+                                       </children>
+                                    </Pane>
+                                    <Label layoutX="282.0" layoutY="6.0" prefHeight="43.0" prefWidth="332.0" text="View Supplier Issue Payments" textFill="#c94141">
+                                       <font>
+                                          <Font name="System Bold Italic" size="22.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/deliveryVan.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab onSelectionChanged="#activate_defaultManager_Overdraft" text="Manage Overdraft">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to right, rgba(242,246,248,1) 0%, rgba(227,234,238,0.44) 15%, rgba(216,225,231,0.85) 26%, rgba(216,225,231,0.85) 26%, rgba(210,221,227,1) 30%, rgba(181,198,208,0.44) 51%, rgba(192,208,218,0.12) 63%, rgba(192,209,219,0.22) 64%, rgba(199,216,226,1) 72%, rgba(224,239,249,1) 100%);;">
+                           <children>
+                              <Button fx:id="close_daily_transaction131" layoutX="1154.0" layoutY="2.0" mnemonicParsing="false" onMouseClicked="#leave_manager" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/quit.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Pane fx:id="manager_IssueOverdraft_Pane" layoutX="301.0" layoutY="24.0" prefHeight="538.0" prefWidth="634.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="74.0" layoutY="71.0" text="Staff Code">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="72.0" layoutY="272.0" text="Monthly Deduction">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Add Staff" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="72.0" layoutY="167.0" text="Amount">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label fx:id="addStaff_response1" layoutX="217.0" layoutY="456.0" prefHeight="60.0" prefWidth="226.0" text="::" wrapText="true" />
+                                    <Label layoutX="75.0" layoutY="380.0" text="Start Deduction From">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="input_OD_Amount_TxtFld" layoutX="368.0" layoutY="162.0" prefHeight="40.0" prefWidth="220.0" />
+                                    <TextField fx:id="input_OD_monthlyDeduction_TxtFld" layoutX="368.0" layoutY="269.0" prefHeight="40.0" prefWidth="220.0" />
+                                    <DatePicker fx:id="startDeductionDate" layoutX="370.0" layoutY="382.0" prefHeight="40.0" prefWidth="220.0" />
+                                    <Button layoutX="431.0" layoutY="462.0" mnemonicParsing="false" onMouseClicked="#manager_issue_OD_to_database" prefHeight="62.0" prefWidth="159.0" text="Issue Overdraft" textAlignment="CENTER" wrapText="true">
+                                       <font>
+                                          <Font size="15.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TextField fx:id="input_OD_staffName" layoutX="369.0" layoutY="72.0" prefHeight="38.0" prefWidth="219.0" />
+                                 </children>
+                              </Pane>
+                              <Group>
+                                 <children>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="172.0" mnemonicParsing="false" onMouseClicked="#manager_editOverdraft" prefHeight="107.0" prefWidth="117.0" text="Edit Issued overdraft" textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/interact.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="46.0" mnemonicParsing="false" onMouseClicked="#manager_IssueOverdraft" prefHeight="123.0" prefWidth="121.0" text="Issue Overdraft" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="299.0" mnemonicParsing="false" onMouseClicked="#manager_deleteOverdraft" prefHeight="107.0" prefWidth="117.0" text="Delete issued Overdraf" textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="70.0" layoutY="427.0" mnemonicParsing="false" onMouseClicked="#manager_viewOverdraft" prefHeight="120.0" prefWidth="117.0" text="View all overdraft" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                       <font>
+                                          <Font name="FreeSerif Bold" size="18.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Group>
+                              <Pane fx:id="manager_defaultOverdraft" layoutX="301.0" layoutY="24.0" prefHeight="538.0" prefWidth="859.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="220.0" text="Overdraft Management Page" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_viewOverdraft_Pane" layoutX="235.0" layoutY="1.0" prefHeight="587.0" prefWidth="859.0" style="-fx-border-color: white;">
+                                 <children>
+                                    <Label layoutX="298.0" layoutY="1.0" text="View all issued Overdraft" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="viewOverdraft_table" layoutX="14.0" layoutY="38.0" prefHeight="522.0" prefWidth="826.0">
+                                       <columns>
+                                          <TableColumn fx:id="viewOverdraft_StaffCode_col" prefWidth="149.0" text="Staff Name" />
+                                          <TableColumn fx:id="viewOverdraft_AmountIssued_col" prefWidth="101.0" text="Amount Issued" />
+                                          <TableColumn fx:id="viewOverdraft_DateIssued_col" prefWidth="150.0" text="Date Issued" />
+                                          <TableColumn fx:id="viewOverdraft_deductionStartDate_col" prefWidth="153.0" text="Deduction Start Date" />
+                                          <TableColumn fx:id="viewOverdraft_ExpiryDate_col" prefWidth="146.0" text="Expiry date" />
+                                          <TableColumn fx:id="viewOverdraft_Status_col" prefWidth="125.0" text="Status" />
+                                          <TableColumn fx:id="viewOverdraft_OVCODE_col" maxWidth="0.0" minWidth="0.0" prefWidth="1.0" text="Column X" visible="false" />
+                                       </columns>
+                                    </TableView>
+                                    <Button fx:id="btneditOverdraftInfoFromTable" layoutX="700.0" layoutY="561.0" mnemonicParsing="false" onAction="#editOverdraftInfoFromTable" prefHeight="25.0" prefWidth="56.0" text="Edit" />
+                                    <Button fx:id="btnDeleteOcerdraftInfoFromTable" layoutX="789.0" layoutY="561.0" mnemonicParsing="false" onAction="#deleteOcerdraftInfoFromTable" text="Delete" />
+                                    <Pane fx:id="overDraftEditPane" layoutX="14.0" layoutY="35.0" prefHeight="185.0" prefWidth="826.0" style="-fx-background-color: white; -fx-border-color: green;" visible="false">
+                                       <children>
+                                          <ComboBox fx:id="overdraftStaffNameComboBox" layoutX="14.0" layoutY="69.0" prefWidth="150.0" />
+                                          <TextField fx:id="overdraftAmountTextField" layoutX="238.0" layoutY="69.0" />
+                                          <TextField fx:id="overdraftMonthlydeductionTextField" layoutX="444.0" layoutY="69.0" />
+                                          <DatePicker fx:id="overdraftdeductionStartDatePicker" layoutX="635.0" layoutY="69.0" />
+                                          <Button fx:id="btnSaveOverdraftUpdateInfo" layoutX="323.0" layoutY="134.0" mnemonicParsing="false" onAction="#saveOverdraftUpdateInfo" text="Save" textFill="#0ca814">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="33.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/save.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button fx:id="btnCancelOverdraftUpdate" layoutX="690.0" layoutY="136.0" mnemonicParsing="false" onAction="#cancelOverdraftUpdate" text="Cancel" textFill="#b20e0e">
+                                             <font>
+                                                <Font name="System Bold" size="16.0" />
+                                             </font>
+                                             <graphic>
+                                                <ImageView fitHeight="24.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/cancel.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label layoutX="252.0" layoutY="3.0" text="Edit Overdraft Details" textFill="#c44baf">
+                                             <font>
+                                                <Font name="Consolas Bold" size="18.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="40.0" layoutY="47.0" text="Staff Name" textFill="#a86059">
+                                             <font>
+                                                <Font name="Euphemia" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="287.0" layoutY="47.0" text="Amount" textFill="#a86059">
+                                             <font>
+                                                <Font name="Euphemia" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="458.0" layoutY="47.0" text="Monthy Deduction" textFill="#a86059">
+                                             <font>
+                                                <Font name="Euphemia" size="14.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="653.0" layoutY="47.0" text="DeductionStart Date" textFill="#a86059">
+                                             <font>
+                                                <Font name="Euphemia" size="14.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/overdraft.PNG" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab fx:id="activate_defaultManager_transaction11" onSelectionChanged="#activate_defaultManager_Custumer" text="Custumer section">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="167.0" prefWidth="162.0">
+                           <children>
+                              <Button contentDisplay="TOP" layoutX="71.0" layoutY="14.0" mnemonicParsing="false" onMouseClicked="#manager_addCustumer" prefHeight="122.0" prefWidth="117.0" text="Add Custumer" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/addCustomer.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="TOP" layoutX="12.0" layoutY="297.0" mnemonicParsing="false" onMouseClicked="#manager_editCustumer" prefHeight="117.0" prefWidth="117.0" text="Edit custumer info" textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/interact.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="TOP" layoutX="136.0" layoutY="302.0" mnemonicParsing="false" onMouseClicked="#manager_deleteCustumer" prefHeight="107.0" prefWidth="117.0" text="Delete Custumer" textAlignment="CENTER" textFill="#fffefe" visible="false" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/delete.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Button contentDisplay="TOP" layoutX="71.0" layoutY="449.0" mnemonicParsing="false" onMouseClicked="#manager_viewCustumer" prefHeight="126.0" prefWidth="117.0" text="View Custumer infos" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="15.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/Search-icon.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manager_addCustumer" layoutX="380.0" layoutY="10.0" prefHeight="556.0" prefWidth="634.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="68.0" layoutY="67.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="181.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="74.0" layoutY="302.0" text="Services">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Add Custumer" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="add_CustumerCodeTxtFld" layoutX="285.0" layoutY="65.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <TextField fx:id="add_CustumerNameTxtFld" layoutX="285.0" layoutY="178.0" prefHeight="40.0" prefWidth="300.0">
+                                       <effect>
+                                          <DropShadow />
+                                       </effect>
+                                    </TextField>
+                                    <TextArea fx:id="add_CustumerServiceTxtFld" layoutX="285.0" layoutY="297.0" prefHeight="169.0" prefWidth="304.0" />
+                                    <Button layoutX="488.0" layoutY="476.0" mnemonicParsing="false" onMouseClicked="#addCustumer_to_database" text="Add" textFill="#fffefe">
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="23.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/add.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Label fx:id="addSupplier_response1" layoutX="317.0" layoutY="501.0" text="::" />
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_editCustumer" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="8.0" layoutY="47.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="301.0" layoutY="47.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="208.0" layoutY="1.0" text="Edit Custumer Details" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField layoutX="74.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <TextField layoutX="361.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <Button layoutX="571.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Search" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TableView layoutX="17.0" layoutY="84.0" prefHeight="401.0" prefWidth="867.0">
+                                       <columns>
+                                          <TableColumn prefWidth="118.0" text="Code" />
+                                          <TableColumn prefWidth="187.0" text="Name" />
+                                          <TableColumn prefWidth="463.0" text="Description" />
+                                          <TableColumn prefWidth="98.0" text="Activeness" />
+                                       </columns>
+                                    </TableView>
+                                    <Button layoutX="673.0" layoutY="493.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Cancel" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/close.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button layoutX="805.0" layoutY="493.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Save" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/save.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_viewCustumer" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="29.0" layoutY="47.0" text="Code">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="301.0" layoutY="47.0" text="Name">
+                                       <font>
+                                          <Font name="FreeMono" size="20.0" />
+                                       </font>
+                                    </Label>
+                                    <Label layoutX="269.0" layoutY="-4.0" prefHeight="35.0" prefWidth="254.0" text="View Custumer Infos" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField layoutX="95.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <TextField layoutX="361.0" layoutY="45.0" prefHeight="20.0" prefWidth="200.0">
+                                       <effect>
+                                          <DropShadow>
+                                             <input>
+                                                <Glow />
+                                             </input>
+                                          </DropShadow>
+                                       </effect>
+                                    </TextField>
+                                    <Button layoutX="571.0" layoutY="39.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Search" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/search-icon(2).png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <TableView fx:id="view_custumerTable" layoutX="16.0" layoutY="30.0" prefHeight="392.0" prefWidth="867.0">
+                                       <columns>
+                                          <TableColumn fx:id="view_custumerTable_codeCol" prefWidth="118.0" text="Code" />
+                                          <TableColumn fx:id="view_custumerTable_nameCol" prefWidth="221.0" text="Name" />
+                                          <TableColumn fx:id="view_custumerTable_prefServCol" prefWidth="526.0" text="Prefered services" />
+                                       </columns>
+                                    </TableView>
+                                    <Group fx:id="infoEditingGroup111">
+                                       <children>
+                                          <Button layoutX="711.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_deleteCustumer" text="Delete">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/delete_red.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Button layoutX="804.0" layoutY="424.0" mnemonicParsing="false" onMouseClicked="#mini_editCustumer" text="Edit">
+                                             <graphic>
+                                                <ImageView fitHeight="22.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@njie_img/edit.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Pane fx:id="miniPaneForCustumer" layoutX="26.0" layoutY="459.0">
+                                             <children>
+                                                <TextField fx:id="input_EDIT_custumer_prefServices" layoutX="400.0" layoutY="23.0" prefHeight="25.0" prefWidth="454.0" />
+                                                <Label layoutX="579.0" layoutY="3.0" text="Prefered services" />
+                                                <Label layoutX="33.0" layoutY="3.0" text="custumer code" />
+                                                <TextField fx:id="input_EDIT_custumer_Name" layoutX="182.0" layoutY="23.0" />
+                                                <Button layoutX="733.0" layoutY="52.0" mnemonicParsing="false" onMouseClicked="#updateCustumerInformation" text="Update">
+                                                   <graphic>
+                                                      <ImageView fitHeight="14.0" fitWidth="21.0" pickOnBounds="true" preserveRatio="true">
+                                                         <image>
+                                                            <Image url="@njie_img/agt_action_success.png" />
+                                                         </image>
+                                                      </ImageView>
+                                                   </graphic>
+                                                </Button>
+                                                <TextField fx:id="input_EDIT_custumer_ID" layoutX="30.0" layoutY="23.0" prefHeight="25.0" prefWidth="96.0" />
+                                                <Label layoutX="208.0" layoutY="3.0" text="custumer name" />
+                                             </children>
+                                          </Pane>
+                                       </children>
+                                    </Group>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="manager_defaultCustumer" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Button contentDisplay="TOP" layoutX="357.0" layoutY="74.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Add a supplier information" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="23.0" fitWidth="23.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/Workgroup_white.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="361.0" layoutY="177.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Edit the suppilier's details" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="387.0" layoutY="404.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="View all suppliers" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/Search-icon.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button contentDisplay="TOP" layoutX="320.0" layoutY="290.0" mnemonicParsing="false" style="-fx-background-color: inherit;" text="Delete a supplier's info from the system" textAlignment="CENTER" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/delete.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                 </children>
+                              </Pane>
+                              <Button contentDisplay="TOP" layoutX="71.0" layoutY="156.0" mnemonicParsing="false" onMouseClicked="#manager_custumer_issueDebt" prefHeight="120.0" prefWidth="117.0" text="Make a debt" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="49.0" fitWidth="48.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/debt.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manager_Custumer_issueDebt" layoutX="263.0" layoutY="24.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Pane layoutX="198.0" layoutY="69.0" prefHeight="374.0" prefWidth="439.0" style="-fx-border-color: white;">
+                                       <children>
+                                          <Label layoutX="43.0" layoutY="73.0" prefHeight="53.0" prefWidth="115.0" text="Custumer's Code" wrapText="true">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <Label layoutX="43.0" layoutY="208.0" text="Amount">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                          <ComboBox fx:id="CustumerCode_issueDebtCmbox" layoutX="194.0" layoutY="84.0" prefHeight="30.0" prefWidth="200.0">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </ComboBox>
+                                          <TextField fx:id="issueDebt_amtTxtFld" layoutX="194.0" layoutY="197.0" prefHeight="30.0" prefWidth="200.0">
+                                             <effect>
+                                                <DropShadow />
+                                             </effect>
+                                          </TextField>
+                                          <Button layoutX="242.0" layoutY="286.0" mnemonicParsing="false" onMouseClicked="#manager_issue_CustumerDebt" style="-fx-background-color: transparent;" text="Issue Debt">
+                                             <cursor>
+                                                <Cursor fx:constant="HAND" />
+                                             </cursor>
+                                             <graphic>
+                                                <ImageView fitHeight="35.0" fitWidth="54.0" pickOnBounds="true" preserveRatio="true">
+                                                   <image>
+                                                      <Image url="@../../../QueryChecker/src/querychecker/NjieAccount+database/src/njieaccount/njie_img/accountcreation-icon.png" />
+                                                   </image>
+                                                </ImageView>
+                                             </graphic>
+                                          </Button>
+                                          <Label layoutX="136.0" layoutY="5.0" text="Make dept for custumer">
+                                             <font>
+                                                <Font name="FreeMono Bold" size="19.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                              <Button fx:id="close_daily_transaction121" layoutX="1156.0" layoutY="1.0" mnemonicParsing="false" onMouseClicked="#leave_manager" prefHeight="34.0" prefWidth="63.0" style="-fx-cursor: hand;" styleClass="buttons_3" stylesheets="@main.css" text="Quit">
+                                 <graphic>
+                                    <ImageView fitHeight="13.0" fitWidth="16.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/quit.PNG" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic></Button>
+                              <Button contentDisplay="TOP" layoutX="71.0" layoutY="296.0" mnemonicParsing="false" onAction="#displayCustomerManagementPane" prefHeight="143.0" prefWidth="117.0" text="Edit Customer Debt" textAlignment="CENTER" textFill="#fffefe" wrapText="true">
+                                 <font>
+                                    <Font name="FreeSerif Bold" size="18.0" />
+                                 </font>
+                                 <graphic>
+                                    <ImageView fitHeight="57.0" fitWidth="57.0" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/interact.png" />
+                                       </image>
+                                    </ImageView>
+                                 </graphic>
+                              </Button>
+                              <Pane fx:id="manager_EditCustumerIssuedDebtDisplayPane" layoutX="259.0" layoutY="17.0" prefHeight="538.0" prefWidth="898.0" style="-fx-border-color: white;">
+                                 <children>
+                                    <Label layoutX="214.0" text="Edit Debt Issued To Customer" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="editCustumerDebtsTable" layoutX="17.0" layoutY="35.0" prefHeight="450.0" prefWidth="867.0">
+                                       <columns>
+                                          <TableColumn fx:id="editCustDebt_code" prefWidth="157.0" text="Code" visible="false" />
+                                          <TableColumn fx:id="editCustDebt_name" prefWidth="297.0" text="Customer Name" />
+                                          <TableColumn fx:id="editCustDebt_amt" prefWidth="241.0" text="Debt Amount" />
+                                          <TableColumn fx:id="editCustDebt_date" prefWidth="326.0" text="Date" />
+                                       </columns>
+                                    </TableView>
+                                    <Button layoutX="793.0" layoutY="491.0" mnemonicParsing="false" onMouseClicked="#displayMiniPaneToEditCustDebtIssued" style="-fx-background-color: inherit;" text="Edit" textFill="#250505">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="Droid Serif Bold" size="12.0" />
+                                       </font>
+                                       <graphic>
+                                          <ImageView fitHeight="30.0" fitWidth="30.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@njie_img/edit.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Pane fx:id="editCustDebtMiniPane" layoutX="73.0" layoutY="61.0" prefHeight="187.0" prefWidth="737.0" style="-fx-background-color: white; -fx-border-color: green;" visible="false">
+                                       <children>
+                                          <ComboBox fx:id="custNameForDebtEditingCmBx" layoutX="56.0" layoutY="58.0" prefHeight="31.0" prefWidth="211.0" />
+                                          <TextField fx:id="debtAmtForCustDebtEdit" layoutX="467.0" layoutY="58.0" prefHeight="31.0" prefWidth="211.0" />
+                                          <Button layoutX="390.0" layoutY="136.0" mnemonicParsing="false" onMouseClicked="#saveTodatabaseChangesOnEditedCustumerDebt" text="Save">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Button layoutX="576.0" layoutY="136.0" mnemonicParsing="false" onMouseClicked="#cancelProcessOfCustumerDebtEditing" text="Cancel">
+                                             <font>
+                                                <Font name="System Bold" size="19.0" />
+                                             </font>
+                                          </Button>
+                                          <Label layoutX="113.0" layoutY="33.0" text="Customer Name" />
+                                          <Label layoutX="537.0" layoutY="33.0" text="Debt Amount" />
+                                          <Label layoutX="313.0" layoutY="9.0" onMouseClicked="#manager_editIssuedCustDebt" text="Edit Custumer Debt" textFill="#6a1790">
+                                             <font>
+                                                <Font name="Liberation Sans Narrow Bold" size="20.0" />
+                                             </font>
+                                          </Label>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </Pane>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="22.0" fitWidth="27.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/user-info-icon.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab onSelectionChanged="#manViewIncTrans" text="Reports and queries">
+                     <content>
+                        <AnchorPane fx:id="reportsAnchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: linear-gradient(to right, rgba(242,246,248,1) 0%, rgba(227,234,238,0.44) 15%, rgba(216,225,231,0.85) 26%, rgba(216,225,231,0.85) 26%, rgba(210,221,227,1) 30%, rgba(181,198,208,0.44) 51%, rgba(192,208,218,0.12) 63%, rgba(192,209,219,0.22) 64%, rgba(199,216,226,1) 72%, rgba(224,239,249,1) 100%);;">
+                           <children>
+                              <Pane fx:id="report_genTrans_D1" layoutX="163.0" layoutY="33.0" prefHeight="538.0" prefWidth="1049.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label fx:id="report_staff_D" layoutX="14.0" layoutY="6.0" text="Staff --&gt; Payroll" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="payrollReportTable" layoutX="14.0" layoutY="38.0" prefHeight="468.0" prefWidth="1003.0">
+                                       <columns>
+                                          <TableColumn fx:id="viewStaff_code_col11" prefWidth="127.0" text="Staff Code" />
+                                          <TableColumn fx:id="viewStaff_name_col11" prefWidth="127.0" text="Monthly Salary" />
+                                          <TableColumn fx:id="viewStaff_phone_col11" prefWidth="131.0" text="Amt Collected" />
+                                          <TableColumn fx:id="viewStaff_salary_col11" prefWidth="150.0" text="Date of collection" />
+                                          <TableColumn fx:id="viewStaff_branch_col111" prefWidth="139.0" text="Overdraft ?" />
+                                          <TableColumn fx:id="viewStaff_salary_col111" prefWidth="162.0" text="Overdraft Deduction" />
+                                          <TableColumn fx:id="viewStaff_branch_col11" prefWidth="166.0" text="Balance Left" />
+                                       </columns>
+                                    </TableView>
+                                    <ComboBox fx:id="report_payrollStaffIdCmBx" layoutX="768.0" layoutY="8.0" prefHeight="25.0" prefWidth="211.0" />
+                                    <Label layoutX="688.0" layoutY="13.0" text="Staff Name" />
+                                    <ImageView fitHeight="35.0" fitWidth="44.0" layoutX="982.0" layoutY="3.0" onMouseClicked="#report_searchButtonByStaffIdForPayroll" pickOnBounds="true" preserveRatio="true">
+                                       <image>
+                                          <Image url="@njie_img/search-icon(2).png" />
+                                       </image>
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                    </ImageView>
+                                    <Label layoutX="325.0" layoutY="519.0" prefHeight="21.0" prefWidth="323.0" text="Label" />
+                                    <Hyperlink layoutX="466.0" layoutY="6.0" onMouseClicked="#searchAllPayroll_HpLk" style="-fx-border-color: white; -fx-border-radius: 8;" text="Search All" textFill="#794a9a">
+                                       <font>
+                                          <Font name="DejaVu Serif Condensed Bold" size="17.0" />
+                                       </font></Hyperlink>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="report_supplier_D" layoutX="163.0" layoutY="33.0" prefHeight="538.0" prefWidth="1032.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="371.0" text="Supplier" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="viewStaff_table12" layoutX="14.0" layoutY="38.0" prefHeight="479.0" prefWidth="1003.0">
+                                       <columns>
+                                          <TableColumn fx:id="viewStaff_code_col12" prefWidth="127.0" text="Staff Code" />
+                                          <TableColumn fx:id="viewStaff_name_col12" prefWidth="210.0" text="Name" />
+                                          <TableColumn fx:id="viewStaff_phone_col12" prefWidth="152.0" text="Phone Number" />
+                                          <TableColumn fx:id="viewStaff_salary_col12" prefWidth="176.0" text="Salary" />
+                                          <TableColumn fx:id="viewStaff_branch_col12" prefWidth="158.0" text="Branch" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                              <Pane fx:id="report_custumer_D" layoutX="163.0" layoutY="33.0" prefHeight="538.0" prefWidth="1032.0" style="-fx-border-color: white;" visible="false">
+                                 <children>
+                                    <Label layoutX="371.0" text="Custumer" textFill="#c44baf">
+                                       <font>
+                                          <Font name="FreeMono Bold" size="28.0" />
+                                       </font>
+                                    </Label>
+                                    <TableView fx:id="viewStaff_table13" layoutX="14.0" layoutY="38.0" prefHeight="479.0" prefWidth="1003.0">
+                                       <columns>
+                                          <TableColumn fx:id="viewStaff_code_col13" prefWidth="127.0" text="Staff Code" />
+                                          <TableColumn fx:id="viewStaff_name_col13" prefWidth="210.0" text="Name" />
+                                          <TableColumn fx:id="viewStaff_phone_col13" prefWidth="152.0" text="Phone Number" />
+                                          <TableColumn fx:id="viewStaff_salary_col13" prefWidth="176.0" text="Salary" />
+                                          <TableColumn fx:id="viewStaff_branch_col13" prefWidth="158.0" text="Branch" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </Pane>
+                           </children></AnchorPane>
+                     </content>
+                     <graphic>
+                        <ImageView fitHeight="35.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/reports.PNG" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+                  <Tab onSelectionChanged="#loadSuspensionAnchor" text="Salary Suspension">
+                    <content>
+                      <AnchorPane fx:id="suspensionAnchor" minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" />
+                    </content>
+                     <graphic>
+                        <ImageView fitHeight="23.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@njie_img/minus_circle_green.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                  </Tab>
+              </tabs>
+            </TabPane>
+         </children>
+      </Pane>
+      <Label layoutX="1076.0" layoutY="639.0" text="\@Unity Systems 2014">
+         <font>
+            <Font size="10.0" />
+         </font></Label>
+      <ImageView fitHeight="19.0" fitWidth="26.0" layoutX="1194.0" layoutY="639.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@njie_img/unitysystems.PNG" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>

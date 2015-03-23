@@ -1,0 +1,54 @@
+.income_and_expenditure_anchor{
+	-fx-background-color: inherit;
+	
+}
+
+.income_anchor{
+
+}
+
+.income_anchor, .expenditure_anchor{
+	-fx-background-radius: 8px;
+	-fx-background-color: linear-gradient(to bottom, rgba(255,255,255,1) 0%,rgba(241,241,241,1) 50%,rgba(225,225,225,1) 51%,rgba(246,246,246,1) 100%);
+}
+
+.expenditure_anchor{
+
+
+}
+
+#income_table{
+
+}
+
+.table{
+}
+
+#accoujnts_anchor{
+	-fx-background-color: linear-gradient(to bottom, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%);
+}
+
+#accounts_anchor, #root_anchor{
+	
+}
+
+#root_anchor{
+	-fx-bakground-color: linear-gradient(to bottom, rgba(178,225,255,1) 0%,rgba(102,182,252,1) 100%);
+}
+
+#accounts_anchor{
+	-fx-background-color:   linear-gradient(45deg, rgba(109,242,107,1) 0%, rgba(255,255,255,1) 25%, rgba(94,223,255,1) 50%, rgba(255,255,255,1) 75%, rgba(0,87,87,1) 100%);
+}
+
+.button{
+	-fx-background-color: linear-gradient(to bottom, rgba(179,220,237,1) 0%,rgba(41,184,229,1) 50%,rgba(188,224,238,1) 100%); 
+	-fx-border-color: none;
+}
+
+.button:hover{
+	-fx-background-color: linear-gradient(to bottom, rgba(179,220,237,1) 30%,rgba(41,184,229,1) 80%,rgba(188,224,238,1) 100%); 
+}
+
+.welcome_page{
+    -fx-background-color: linear-gradient (to bottom rgba(222, 239, 255, 1) 99%, rgba(152, 190, 222, 1) 100% );
+}
