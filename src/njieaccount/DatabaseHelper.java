@@ -308,7 +308,7 @@ public class DatabaseHelper {
             String url = "jdbc:derby://" + ip + ":1527/njieDB;create=true";
             System.out.println("Connection string is : " + url);
             Properties props = new Properties();
-            props.put("njie_909_UniSys", "__njie909UniSys__");
+            props.put("usename", "password");
             
             try {
                 //Class.forName("org.apache.derby.jdbc.EmbeddedDriver");
